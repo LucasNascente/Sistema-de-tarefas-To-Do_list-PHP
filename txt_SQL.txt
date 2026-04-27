@@ -1,0 +1,25 @@
+CREATE DATABASE tarefas;
+USE tarefas;
+
+CREATE TABLE usuario (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE tarefas (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    titulo VARCHAR(100) NOT NULL,
+    descricao TEXT,
+    status ENUM('pendente', 'concluida') DEFAULT 'pendente',
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO usuario (usuario, senha) 
+VALUES ('admin', MD5('123456'));
+
+INSERT INTO tarefas (usuario_id, titulo, descricao, status) VALUES 
+(1, 'Compras do mês', 'Comprar arroz, feijão, mistura e produtos de limpeza.', 'pendente'),
+(1, 'Pagar boleto de luz', 'Vence dia 10. Pegar o código de barras no email.', 'pendente'),
+(1, 'Agendar dentista', 'Ligar na clínica para marcar limpeza de rotina.', 'concluida');
